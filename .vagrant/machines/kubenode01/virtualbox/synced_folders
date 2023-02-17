@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/mahdi/devopsProjects/certified-kubernetes-administrator-course","disabled":false,"__vagrantfile":true}}}
+{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/mahdi/upwork/formation devops/kubernetes/07-kubeadm/Kuberentes-vagrant-provision-master-2nodes-nfsserver","disabled":false,"__vagrantfile":true}}}

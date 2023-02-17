@@ -5,12 +5,10 @@
 # If this number is changed, remember to update setup-hosts.sh script with the new hosts IP details in /etc/hosts of each VM.
 NUM_MASTER_NODE = 1
 NUM_WORKER_NODE = 2
-NUM_NFS_SERVER = 1
 
 IP_NW = "192.168.56."
 MASTER_IP_START = 1
 NODE_IP_START = 2
-NFS_IP_START = 80
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -96,27 +94,6 @@ Vagrant.configure("2") do |config|
         node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
     end
   end
-
-   # Provision NFS SERVER
-   (1..NUM_NFS_SERVER).each do |i|
-    config.vm.define "nfsserver#{i}" do |node|
-        node.vm.provider "virtualbox" do |vb|
-            vb.name = "nfsserver#{i}"
-            vb.memory = 2048
-            vb.cpus = 1
-        end
-        node.vm.hostname = "nfsserver#{i}"
-        node.vm.network :private_network, ip: IP_NW + "#{NFS_IP_START + i}"
-                node.vm.network "forwarded_port", guest: 22, host: "#{2730 + i}"
-
-        node.vm.provision "setup-hosts", :type => "shell", :path => "ubuntu/vagrant/setup-hosts.sh" do |s|
-          s.args = ["enp0s8"]
-        end
-
-        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
-    end
-  end
-
 
 
 end
